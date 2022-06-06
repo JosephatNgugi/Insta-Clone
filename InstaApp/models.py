@@ -16,16 +16,41 @@ class UserProfile(models.Model):
     following = models.ManyToManyField('UserProfile', blank=True)
     followers = models.ManyToManyField('UserProfile', blank=True)
     joined = models.DateTimeField(auto_now_add=True, default=timezone.now)
-    
+        
+    def save_profile(self):
+        """Method to save user details"""
+        self.user
+
+    def delete_profile(self):
+        """Method to delete user details"""
+        self.delete()
+
+    @classmethod
+    def search_profile(cls, name):
+        """Method to Search for a user profile"""
+        return cls.objects.filter(user__username__icontains=name).all()
+
     @receiver(post_save, sender=User)
     def create_user_profile(sender, instance, created, **kwargs):
+        """
+        This method will automatically create a user profile using user details provided
+
+        Args:
+            sender (_type_): The sender of the signal. This will be triggered by the user
+            instance (_type_): instance of user being created
+            created (_type_): user profile to be created
+        """
         if created:
             UserProfile.objects.create(user=instance)
     
     @receiver(post_save, sender=User)
     def save_user_profile(sender, instance, **kwargs):
+        """This method will save the userprofile instance created"""
         instance.UserProfile.save
-        
+
+    def __str__(self):
+        return f'{self.user.username} Profile'
 # Posts Models
+
 # Comments Models
 # Likes Models
