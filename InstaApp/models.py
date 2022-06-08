@@ -4,18 +4,19 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 from PIL import Image
+from cloudinary.models import CloudinaryField
 
 # Create your models here.
 
 # UserProfiles Models
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
-    profile_pic = models.ImageField('image file', upload_to='Insta/profilePics', default='static/images/default-profile.png')
+    profile_pic = CloudinaryField('image', default='static/images/default-profile.png')
     about = models.TextField(max_length=500, default='About Me', blank=True)
     name = models.CharField(max_length=60)
     following = models.ManyToManyField('UserProfile', blank=True)
     followers = models.ManyToManyField('UserProfile', blank=True)
-    joined = models.DateTimeField(auto_now_add=True, default=timezone.now)
+    joined = models.DateTimeField(default=timezone.now)
         
     def save_profile(self):
         """Method to save user details"""
@@ -24,6 +25,12 @@ class UserProfile(models.Model):
     def delete_profile(self):
         """Method to delete user details"""
         self.delete()
+        
+    # def update_profile(self,user_id, about, profile_pic):
+    #     user = User.objects.get(id=user_id)
+    #     self.about = about
+    #     self.profile_pic = profile_pic
+    #     self.save(user)
 
     @classmethod
     def search_profile(cls, name):
@@ -50,7 +57,14 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return f'{self.user.username} Profile'
+    
 # Posts Models
-
+class UserPost(models.Model):
+    user = models.ForeignKey(UserProfile, on_delete= models.CASCADE, related_name='posts')
+    image = CloudinaryField('image')
+    caption = models.CharField(max_length=300, blank=True)
+    date_posted = models.DateTimeField(default=timezone.now)
+    likes = models.ManyToManyField(User, blank=True)
+    
 # Comments Models
 # Likes Models
