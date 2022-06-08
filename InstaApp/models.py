@@ -14,8 +14,6 @@ class UserProfile(models.Model):
     profile_pic = CloudinaryField('image', default='static/images/default-profile.png')
     about = models.TextField(max_length=500, default='About Me', blank=True)
     name = models.CharField(max_length=60)
-    following = models.ManyToManyField('UserProfile', blank=True)
-    followers = models.ManyToManyField('UserProfile', blank=True)
     joined = models.DateTimeField(default=timezone.now)
         
     def save_profile(self):
@@ -50,7 +48,7 @@ class UserProfile(models.Model):
         if created:
             UserProfile.objects.create(user=instance)
     
-    @receiver(post_save, sender=User)
+    @receiver(post_save, sender=user)
     def save_user_profile(sender, instance, **kwargs):
         """This method will save the userprofile instance created"""
         instance.UserProfile.save
@@ -96,6 +94,12 @@ class Comment(models.Model):
     created = models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):
-        return f'{self.user.name} Post'
+        return f'{self.user.name} Comment'
 
-# Likes Models
+# Follow Models
+class Follow(models.Model):
+    follower = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name='following')
+    followed = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name='followers')
+
+    def __str__(self):
+        return f'{self.follower} Follow'
