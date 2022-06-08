@@ -87,5 +87,15 @@ class UserPost(models.Model):
 
     def __str__(self):
         return f'{self.user.caption} Post'
+    
 # Comments Models
+class Comment(models.Model):
+    comment = models.TextField()
+    post = models.ForeignKey(UserPost, on_delete=models.CASCADE, related_name='comments')
+    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name='comments')
+    created = models.DateTimeField(auto_now_add=True, null=True)
+
+    def __str__(self):
+        return f'{self.user.name} Post'
+
 # Likes Models
