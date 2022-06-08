@@ -44,9 +44,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
     # my apps
+    'crispy_forms',
+    'bootstrap3',
     'InstaApp',
     'static',
     'cloudinary',
+   
+    
 ]
 
 MIDDLEWARE = [
@@ -154,9 +158,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Cloudinary Configurations
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 cloudinary.config(
-    cloud_name = os.environ.get('CLOUDINARY_LOUD_NAME'),
-    api_key = os.environ.get('CLOUDINARY_PI_KEY'),
-    api_secret = os.environ.get('CLOUDINARY_ECRET'),
+    cloud_name = os.environ.get('CLOUDINARY_CLOUD_NAME'),
+    api_key = os.environ.get('CLOUDINARY_API_KEY'),
+    api_secret = os.environ.get('CLOUDINARY_SECRET'),
     secure = True
 )
 
