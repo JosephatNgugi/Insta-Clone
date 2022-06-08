@@ -66,5 +66,26 @@ class UserPost(models.Model):
     date_posted = models.DateTimeField(default=timezone.now)
     likes = models.ManyToManyField(User, blank=True)
     
+    class Meta:
+        ordering = ["-pk"]
+
+    def get_absolute_url(self):
+        return f"/post/{self.id}"
+
+    @property
+    def get_all_comments(self):
+        return self.comments.all()
+
+    def total_likes(self):
+        return self.likes.count()
+    
+    def save_image(self):
+        self.save()
+
+    def delete_image(self):
+        self.delete()
+
+    def __str__(self):
+        return f'{self.user.caption} Post'
 # Comments Models
 # Likes Models

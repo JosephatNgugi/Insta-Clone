@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 load_dotenv(find_dotenv())
-SECRET_KEY = os.environ['SECRET_KEY']
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('SECRET_KEY')
@@ -44,9 +44,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
     # my apps
-    'InstaApp'
-    'static'
-    'cloudinary'
+    'InstaApp',
+    'static',
+    'cloudinary',
 ]
 
 MIDDLEWARE = [
@@ -85,14 +85,14 @@ WSGI_APPLICATION = 'Instagram_Clone.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-if os.environ('MODE')=='dev':
+if os.environ.get('MODE')=='dev':
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': os.environ('DB_NAME'),
-            'USER': os.environ('DB_USER'),
-            'PASSWORD': os.environ('DB_PASSWORD'),
-            'HOST': os.environ('DB_HOST'),
+            'NAME': os.environ.get('DB_NAME'),
+            'USER': os.environ.get('DB_USER'),
+            'PASSWORD': os.environ.get('DB_PASSWORD'),
+            'HOST': os.environ.get('DB_HOST'),
             'PORT': '',
         }
 }
@@ -153,9 +153,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Cloudinary Configurations
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 cloudinary.config(
-    cloud_name = os.environ['CLOUDINARY_CLOUD_NAME'],
-    api_key = os.environ['CLOUDINARY_API_KEY'],
-    api_secret = os.environ['CLOUDINARY_SECRET'],
+    cloud_name = os.environ.get('CLOUDINARY_LOUD_NAME'),
+    api_key = os.environ.get('CLOUDINARY_PI_KEY'),
+    api_secret = os.environ.get('CLOUDINARY_ECRET'),
     secure = True
 )
 
