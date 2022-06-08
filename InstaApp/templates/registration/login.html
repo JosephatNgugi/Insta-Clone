@@ -1,0 +1,36 @@
+{% extends 'registration/base.html' %}
+{% load bootstrap3 %}
+{% block content %}
+<div class="container form">
+    <div class="row sign-in top-margin">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="form-section" id="login">
+                    <form action="/accounts/login/" method="POST">
+                        <div class="mylogo">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/200px-Instagram_logo.svg.png"
+                                class="mylogo">
+                        </div>
+                        {% csrf_token %}
+                        {% bootstrap_form form %}
+                        <div class="form-group text-center p-3">
+                            <input type="submit" class="btn btn-primary btn-sm" value="Log In">
+                        </div>
+                        <input type="hidden" name="next" value="/">
+                    </form>
+                </div>
+                {% if form.errors %}
+                <p class="small">Password or Username is incorrect</p>
+                {% endif %}
+                <p class="p-3">Forgot Password?</p>
+            </div>
+            <div class="card mt-3 p-2">
+                <p class="forgot">Don't have an account? <a href="/accounts/Sign-Up/">Sign-Up</a></p>
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</div>
+
+{% endblock %}

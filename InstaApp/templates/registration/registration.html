@@ -1,8 +1,8 @@
-{% extends "base.html" %}
+{% extends "registration/base.html" %}
 {% load bootstrap3 %}
 
 {% block content %}
-<div class="container regform">
+<div class="container form">
     <div class="row">
         <div class="col-md-3"></div>
         <div class="col-md-6 top-margin card">
@@ -22,7 +22,7 @@
                 </button>
             </div>
             {% endif %}
-            <form method="POST" action="/accounts/register">
+            <form method="POST" action="/accounts/register/">
                 <div class="mylogo">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/200px-Instagram_logo.svg.png"
                         class="mylogo">
@@ -36,7 +36,7 @@
                 </div>
             </form>
             <div class="mx-auto mt-1" style="width: 300px;">
-                <p>Already registered? <a href="/accounts/login">Sign In</a></p>
+                <p>Already registered? <a href="/accounts/login/">Sign In</a></p>
             </div>
         </div>
         <div class="col-md-3"></div>

@@ -20,7 +20,7 @@ def UserRegistration(request):
             return redirect('home')
     else:
         form = SignUpForm()
-    return render(request, 'Insta/auth/registration.html', {'form': form})
+    return render(request, 'registration/registration.html', {'form': form})
 
 @login_required(login_url='/accounts/login/')
 def home(request):
