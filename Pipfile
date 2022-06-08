@@ -9,6 +9,10 @@ cloudinary = "*"
 pillow = "*"
 psycopg2 = "*"
 python-dotenv = "*"
+django-heroku = "*"
+whitenoise = "*"
+dj-database-url = "*"
+django-cloudinary-storage = "*"
 
 [dev-packages]
 
