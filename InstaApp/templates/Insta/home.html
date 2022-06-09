@@ -2,10 +2,10 @@
 
 <!--  -->
 {% block content %}
-<section>
+<section class="container-fluid p-5 m-5">
     {% for post in posts %}
     <article id="post">
-        <div class="Instagram-card">
+        <div class="Instagram-card card-body pt-3">
             <div class="Instagram-card-header">
                 <a href="user/{{post.profile.user.id}}">
                     <img src="{{post.profile.photo.url}}" class="Instagram-card-user-image ">
@@ -14,8 +14,8 @@
                 <a class="instagram-card-icon left" href="#"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></a>
             </div>
 
-            <div class="Instagram-card-image">
-                <img src="{{post.image.url}}" width="595">
+            <div class="Instagram-card-image mt-3">
+                <img src="{{post.image.url}}" width="350">
             </div>
 
             <div class="Instagram-card-content">
@@ -31,7 +31,7 @@
                     View all {{number}} comments
                     {% endif %}
                 </a>
-                <p class="date">{{post.created_on|timesince}} AGO </p>
+                <p class="date">{{post.posted|timesince}} AGO </p>
                 <hr>
             </div>
 
