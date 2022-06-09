@@ -33,3 +33,9 @@ def home(request):
     posts = UserPost.objects.all()
     number = Comment.objects.count()
     return render(request, 'Insta/home.html',{'posts':posts, 'number':number})
+
+@login_required(login_url='/accounts/login/')
+def profile(request):
+    current_user = request.user.profile
+    profPic = UserPost.objects.filter(profile=current_user).all()
+    return render(request, 'profile.html', {'profPic':profPic})
