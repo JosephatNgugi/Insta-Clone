@@ -17,6 +17,7 @@ django-registration = "*"
 django-registration-redux = "*"
 django-crispy-forms = "*"
 django-bootstrap3 = "*"
+gunicorn = "*"
 
 [dev-packages]
 
