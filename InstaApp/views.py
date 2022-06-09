@@ -3,7 +3,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login, authenticate, login, logout
 
-from .forms import SignUpForm
+from .models import UserPost, Comment
+from .forms import *
 
 
 # Create your views here.
@@ -29,4 +30,6 @@ def logout_user(request):
 
 @login_required(login_url='/accounts/login/')
 def home(request):
-    return render(request, 'Insta/home.html')
+    posts = UserPost.objects.all()
+    number = Comment.objects.count()
+    return render(request, 'Insta/home.html',{'posts':posts, 'number':number})
